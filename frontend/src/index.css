@@ -1,140 +1,49 @@
-/* Forgot Password Page Styling */
-.forgot-password-container,
-.verify-email-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  max-width: 500px;
-  margin: auto;
-  background-color: #f9f9f9;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
+/* Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
+
+/* Layout and Root Variables */
+:root {
+  --primary: #1aac83;
+  --error: #e7195a;
+  --success: #5bc0de;
+  --background: #f4f4f4;
+  --card-bg: #fff;
+  --button-bg: #4CAF50;
+  --button-hover-bg: #45a049;
+  --font-family: 'Poppins', sans-serif;
 }
 
-h2 {
-  font-size: 28px;
-  margin-bottom: 20px;
+/* Global Styles */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--background);
+  font-family: var(--font-family);
+  line-height: 1.6;
+  padding: 20px;
   color: #333;
 }
 
-.forgot-password-form,
-.verify-email-form {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+h1, h2, h3 {
+  color: #333;
+  font-weight: bold;
 }
 
-.forgot-password-form input,
-.verify-email-form input {
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.forgot-password-form button,
-.verify-email-form button {
-  padding: 12px;
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-  border-radius: 4px;
-  transition: background-color 0.3s;
-}
-
-.forgot-password-form button:hover,
-.verify-email-form button:hover {
-  background-color: #45a049;
-}
-
-.message {
-  margin-top: 20px;
-  text-align: center;
-  color: #d9534f; /* Red color for errors */
-}
-
-.message.success {
-  color: #5bc0de; /* Light blue for success */
-}
-
-/* Responsive Design for Mobile */
-@media screen and (max-width: 768px) {
-  .forgot-password-container,
-  .verify-email-container {
-    width: 90%;
-    padding: 15px;
-  }
-}
-
-/* Reset Password Page Styling */
-.reset-password-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
   padding: 20px;
-  max-width: 500px;
-  margin: auto;
-  background-color: #f9f9f9;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-}
-
-.reset-password-form {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.reset-password-form input {
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.reset-password-form button {
-  padding: 12px;
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-  border-radius: 4px;
-  transition: background-color 0.3s;
-}
-
-.reset-password-form button:hover {
-  background-color: #45a049;
-}
-
-.message {
-  margin-top: 20px;
-  text-align: center;
-  color: #d9534f; /* Red color for errors */
-}
-
-.message.success {
-  color: #5bc0de; /* Light blue for success */
-}
-
-/* Responsive Design for Mobile */
-@media screen and (max-width: 768px) {
-  .reset-password-container {
-    width: 90%;
-    padding: 15px;
-  }
 }
 
 /* Header Styles */
 header {
-  background-color: #4caf50;
+  background-color: var(--button-bg);
   padding: 15px 0;
   text-align: center;
   color: white;
@@ -153,57 +62,14 @@ header .company-name {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-/* Make the header responsive */
-@media screen and (max-width: 768px) {
-  header {
-    padding: 10px 0;
-  }
-
-  header .company-name {
-    font-size: 28px;
-  }
-}
-
-/* General Reset */
-*,
-*::before,
-*::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/* Body and Global Styles */
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
-  color: #333;
-  line-height: 1.6;
-  padding: 20px;
-}
-
-h1,
-h2,
-h3 {
-  color: #333;
-  font-weight: bold;
-}
-
-/* Centering content */
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-/* Auth Forms */
+/* Main Form Styling */
 form {
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  max-width: 400px;
+  gap: 20px;
+  max-width: 450px;
   margin: 0 auto;
-  background: white;
+  background: var(--card-bg);
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -214,7 +80,7 @@ select,
 button {
   padding: 12px;
   font-size: 16px;
-  border: 1px solid #ccc;
+  border: 1px solid #ddd;
   border-radius: 4px;
 }
 
@@ -222,7 +88,7 @@ input:focus,
 select:focus,
 button:focus {
   outline: none;
-  border-color: #4caf50;
+  border-color: var(--primary);
 }
 
 input[type="text"],
@@ -233,15 +99,16 @@ select {
 }
 
 button {
-  background-color: #4caf50;
+  background-color: var(--button-bg);
   color: white;
   border: none;
   cursor: pointer;
-  transition: background-color 0.3s;
+  font-family: var(--font-family);
+  transition: background-color 0.3s ease;
 }
 
 button:hover {
-  background-color: #45a049;
+  background-color: var(--button-hover-bg);
 }
 
 button:disabled {
@@ -249,64 +116,91 @@ button:disabled {
   cursor: not-allowed;
 }
 
-/* Headers */
-h2 {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-/* Link Styles */
-a {
-  text-decoration: none;
-  color: #4caf50;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-/* Footer and Messages */
-footer {
-  text-align: center;
-  margin-top: 50px;
-  color: #888;
-}
-
+/* Error and Success Messages */
 .message {
+  margin-top: 20px;
   text-align: center;
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
 }
 
 .message.success {
+  color: var(--success);
   background-color: #d4edda;
-  color: #155724;
+  padding: 10px;
+  border-radius: 4px;
 }
 
 .message.error {
+  color: var(--error);
   background-color: #f8d7da;
-  color: #721c24;
+  padding: 10px;
+  border-radius: 4px;
 }
 
-/* Container for large content */
-.page-content {
+div.error {
+  padding: 10px;
+  background: #ffefef;
+  border: 1px solid var(--error);
+  color: var(--error);
+  border-radius: 4px;
+  margin: 20px 0;
+}
+
+/* Forgot Password, Reset Password, and Verify Email Pages */
+.forgot-password-container,
+.verify-email-container,
+.reset-password-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 80vh;
+  padding: 20px;
+  max-width: 500px;
+  margin: auto;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.forgot-password-form,
+.verify-email-form,
+.reset-password-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.forgot-password-form input,
+.verify-email-form input,
+.reset-password-form input {
   padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
-.page-content > div {
-  max-width: 900px;
+.forgot-password-form button,
+.verify-email-form button,
+.reset-password-form button {
+  padding: 12px;
+  background-color: var(--button-bg);
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 4px;
+  transition: background-color 0.3s;
 }
 
-/* Navbar Styles */
+.forgot-password-form button:hover,
+.verify-email-form button:hover,
+.reset-password-form button:hover {
+  background-color: var(--button-hover-bg);
+}
+
+/* Navbar Styling */
 .navbar {
-  background-color: #4caf50;
+  background-color: var(--button-bg);
   padding: 10px 0;
   color: white;
   position: sticky;
@@ -377,10 +271,17 @@ footer {
   color: #555;
 }
 
-/* Responsive Design for Mobile */
+/* Responsive Design */
 @media screen and (max-width: 768px) {
   .container {
     padding: 10px;
+  }
+
+  .forgot-password-container,
+  .verify-email-container,
+  .reset-password-container {
+    width: 90%;
+    padding: 15px;
   }
 
   form {
@@ -399,16 +300,13 @@ footer {
     flex-direction: column;
     align-items: center;
   }
+
+  .navbar-links {
+    flex-direction: column;
+  }
+
+  .navbar-links li {
+    margin: 5px 0;
+  }
 }
-.forgot-password-btn {
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-  border-radius: 4px;
-  padding: 10px 20px;
-  transition: background-color 0.3s;
-  display: flex;
-  justify-content: center;
-}
+
