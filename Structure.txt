@@ -1,0 +1,102 @@
+backend/
+│
+├── controllers/                     # Logic for handling API requests
+│   ├── authController.js            # Handles OTP authentication, login, registration, and role management
+│   ├── appointmentController.js     # Manages appointments (booking, rescheduling, cancellations)
+│   ├── doctorController.js          # Handles doctor-related functionality (appointments, patient records)
+│   ├── patientController.js         # Manages patient-specific functionality (EMR, prescriptions)
+│   ├── paymentController.js         # Integrates payment gateways and insurance claims
+│   ├── emergencyController.js       # Manages emergency services (ambulance bookings, nurse support)
+│   ├── telemedicineController.js    # Integrates video consultation services (WebRTC, Twilio, etc.)
+│   └── feedbackController.js        # Manages feedback and ratings for doctors and services
+│
+├── models/                          # Data models for MongoDB
+│   ├── userModel.js                 # User schema for authentication, roles, and data
+│   ├── appointmentModel.js          # Schema for appointments
+│   ├── medicalRecordModel.js        # Schema for Electronic Medical Records (EMR)
+│   ├── prescriptionModel.js         # Schema for prescriptions
+│   ├── paymentModel.js              # Schema for payment and insurance data
+│   ├── emergencyModel.js            # Schema for emergency services
+│   ├── feedbackModel.js             # Schema for feedback and ratings
+│   └── telemedicineModel.js         # Schema for telemedicine sessions and logs
+│
+├── routes/                          # API route management
+│   ├── authRoutes.js                # Routes for authentication (login, register, OTP)
+│   ├── appointmentRoutes.js         # Routes for managing appointments (CRUD operations)
+│   ├── doctorRoutes.js              # Routes for doctor-related actions
+│   ├── patientRoutes.js             # Routes for managing patient data (EMR, prescriptions)
+│   ├── paymentRoutes.js             # Routes for payment processing and insurance
+│   ├── emergencyRoutes.js           # Routes for emergency services
+│   ├── telemedicineRoutes.js        # Routes for telemedicine session handling
+│   └── feedbackRoutes.js            # Routes for feedback and ratings
+│
+├── middleware/                      # Reusable middleware for various checks and operations
+│   ├── authMiddleware.js            # Authentication middleware for validating JWT and user roles
+│   ├── errorMiddleware.js           # Error handling middleware for consistent error responses
+│   └── validationMiddleware.js      # Input validation for requests (e.g., appointment data, user info)
+│
+├── config/                          # Configuration files
+│   ├── dbConfig.js                  # MongoDB connection setup
+│   ├── envConfig.js                 # Environment-specific variables (API keys, secret keys)
+│   └── serverConfig.js              # Server-related settings (port, security)
+│
+├── node_modules/                    # Third-party dependencies
+├── .env                              # Environment variables (database URL, API keys, etc.)
+├── package-lock.json                # Lock file for backend dependencies
+├── package.json                     # Backend dependencies and scripts
+└── server.js                        # Main entry point for the backend server, initializes app
+
+frontend/
+│
+├── public/ 
+│   ├── favicon.ico                  # Icon for the web app
+│   ├── index.html                   # HTML template, loaded at the root of the app
+│   ├── manifest.json                # Web app manifest (for PWA support)
+│   └── robots.txt                   # SEO and web crawler instructions
+│
+├── src/ 
+│   ├── components/                  # Reusable UI components (layout, forms, cards, etc.)
+│   │   ├── Navbar.js                # Navigation bar component
+│   │   ├── AppointmentCard.js       # Displaying individual appointments
+│   │   ├── DoctorCard.js            # Displaying doctor information
+│   │   ├── PrescriptionCard.js      # Displaying prescriptions for patients
+│   │   ├── FeedbackForm.js          # Form for submitting feedback
+│   │   └── EmergencyCard.js         # Displaying emergency service options
+│   │
+│   ├── context/                     # Global state management (React Context API)
+│   │   ├── AppContext.js            # Global app state (user session, data sharing)
+│   │   └── AuthContext.js           # Auth-related global state (logged-in user)
+│   │
+│   ├── hooks/                       # Custom React hooks for reusable logic
+│   │   ├── useAuth.js               # Hook for managing authentication status
+│   │   ├── useAppointments.js       # Hook for handling appointment data
+│   │   ├── useTelemedicine.js       # Hook for managing video consultations
+│   │   └── useEmergency.js          # Hook for emergency service-related data
+│   │
+│   ├── pages/                       # Pages representing different views of the app
+│   │   ├── HomePage.js              # Main home page for users to access features
+│   │   ├── AppointmentPage.js       # Page for scheduling and viewing appointments
+│   │   ├── DoctorPage.js            # Doctor's page to manage appointments and consultations
+│   │   ├── PatientPage.js           # Patient dashboard to access EMR, prescriptions
+│   │   ├── PaymentPage.js           # Page for handling payments and insurance
+│   │   ├── EmergencyPage.js         # Page for requesting emergency services and ambulance
+│   │   └── FeedbackPage.js          # Page for submitting and viewing feedback
+│   │
+│   ├── services/                    # API service layer for data fetching
+│   │   ├── api.js                   # Handles communication with backend APIs
+│   │   ├── authService.js           # API functions for authentication (login, register)
+│   │   ├── appointmentService.js    # Functions for appointment management
+│   │   ├── telemedicineService.js   # Functions for video consultation management
+│   │   ├── paymentService.js        # Functions for handling payments and insurance
+│   │   ├── emergencyService.js      # Functions for managing emergency services
+│   │   └── feedbackService.js       # Functions for feedback submission and management
+│   │
+│   ├── App.js                       # Main React application component
+│   ├── index.js                     # Entry point for React application, renders App.js
+│   ├── index.css                    # Global CSS styling for the application
+│   └── App.css                      # Component-specific styles (for App.js)
+│
+├── .gitignore                       # Specifies files to be ignored by Git
+├── package-lock.json                # Lock file for frontend dependencies
+├── package.json                     # Frontend dependencies and scripts
+└── README.md                        # Project documentation, setup, and instructions

@@ -1,0 +1,230 @@
+1. User Model (Base Class)
+This will be the base model for all user types.
+
+js
+Copy
+// models/User.js
+const mongoose = require('mongoose');
+
+const userSchema = new mongoose.Schema({
+  userID: { type: String, required: true, unique: true },
+  name: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
+  phone: { type: String, required: true },
+  role: { type: String, enum: ['Patient', 'Doctor', 'ClinicStaff', 'Admin'], required: true },
+  passwordHash: { type: String, required: true },
+  patientDetails: {
+    patientID: String,
+    DOB: Date,
+    address: String,
+    insuranceDetails: mongoose.Schema.Types.Mixed,
+  },
+  doctorDetails: {
+    doctorID: String,
+    specialization: String,
+    availabilitySchedule: [String],
+  },
+  clinicStaffDetails: {
+    staffID: String,
+    clinicLocation: String,
+  },
+  adminDetails: {
+    adminID: String,
+  },
+}, { timestamps: true });
+
+module.exports = mongoose.model('User', userSchema);
+2. Appointment Model
+This model will store appointment information.
+
+js
+Copy
+// models/Appointment.js
+const mongoose = require('mongoose');
+
+const appointmentSchema = new mongoose.Schema({
+  appointmentID: { type: String, required: true, unique: true },
+  patientID: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  doctorID: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  appointmentDate: { type: Date, required: true },
+  status: { type: String, enum: ['Scheduled', 'Completed', 'Canceled'], required: true },
+}, { timestamps: true });
+
+module.exports = mongoose.model('Appointment', appointmentSchema);
+3. Telemedicine Session Model
+This model will store telemedicine session details.
+
+js
+Copy
+// models/TelemedicineSession.js
+const mongoose = require('mongoose');
+
+const telemedicineSessionSchema = new mongoose.Schema({
+  sessionID: { type: String, required: true, unique: true },
+  patientID: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  doctorID: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  startTime: { type: Date, required: true },
+  endTime: { type: Date },
+  callLogs: [{ timestamp: Date, log: String }],
+}, { timestamps: true });
+
+module.exports = mongoose.model('TelemedicineSession', telemedicineSessionSchema);
+4. EMR Model
+This model will store electronic medical records (EMR) for patients.
+
+js
+Copy
+// models/EMR.js
+const mongoose = require('mongoose');
+
+const emrSchema = new mongoose.Schema({
+  recordID: { type: String, required: true, unique: true },
+  patientID: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  medicalHistory: [{ type: String }],
+  diagnosis: { type: String },
+  treatments: [{ type: String }],
+}, { timestamps: true });
+
+module.exports = mongoose.model('EMR', emrSchema);
+5. Prescription Model
+This model will store prescriptions issued to patients.
+
+js
+Copy
+// models/Prescription.js
+const mongoose = require('mongoose');
+
+const prescriptionSchema = new mongoose.Schema({
+  prescriptionID: { type: String, required: true, unique: true },
+  patientID: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  doctorID: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  medicinesList: [{ medicineName: String, dosage: String, quantity: Number }],
+  dateIssued: { type: Date, required: true },
+}, { timestamps: true });
+
+module.exports = mongoose.model('Prescription', prescriptionSchema);
+6. Payment Model
+This model will store payment information.
+
+js
+Copy
+// models/Payment.js
+const mongoose = require('mongoose');
+
+const paymentSchema = new mongoose.Schema({
+  paymentID: { type: String, required: true, unique: true },
+  patientID: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  amount: { type: Number, required: true },
+  method: { type: String, enum: ['Credit Card', 'Cash', 'Insurance'], required: true },
+  status: { type: String, enum: ['Paid', 'Pending', 'Failed'], required: true },
+}, { timestamps: true });
+
+module.exports = mongoose.model('Payment', paymentSchema);
+7. Emergency Service Model
+This model will store emergency service requests.
+
+js
+Copy
+// models/EmergencyService.js
+const mongoose = require('mongoose');
+
+const emergencyServiceSchema = new mongoose.Schema({
+  serviceID: { type: String, required: true, unique: true },
+  patientID: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  location: { type: String, required: true },
+  type: { type: String, enum: ['Ambulance', 'Doctor Visit'], required: true },
+  status: { type: String, enum: ['Pending', 'Completed'], required: true },
+}, { timestamps: true });
+
+module.exports = mongoose.model('EmergencyService', emergencyServiceSchema);
+8. Medicine Order Model
+This model will store medicine order details.
+
+js
+Copy
+// models/MedicineOrder.js
+const mongoose = require('mongoose');
+
+const medicineOrderSchema = new mongoose.Schema({
+  orderID: { type: String, required: true, unique: true },
+  patientID: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  medicineDetails: [{ medicineName: String, dosage: String, quantity: Number }],
+  status: { type: String, enum: ['Shipped', 'Pending', 'Delivered'], required: true },
+  deliveryAddress: { type: String, required: true },
+}, { timestamps: true });
+
+module.exports = mongoose.model('MedicineOrder', medicineOrderSchema);
+9. Lab Test Booking Model
+This model will store lab test booking information.
+
+js
+Copy
+// models/LabTestBooking.js
+const mongoose = require('mongoose');
+
+const labTestBookingSchema = new mongoose.Schema({
+  testID: { type: String, required: true, unique: true },
+  patientID: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  labDetails: { type: mongoose.Schema.Types.Mixed, required: true },
+  appointmentDate: { type: Date, required: true },
+  status: { type: String, enum: ['Booked', 'Completed', 'Pending'], required: true },
+}, { timestamps: true });
+
+module.exports = mongoose.model('LabTestBooking', labTestBookingSchema);
+Setting up Mongoose
+To connect and use these models in your Node.js app, you need to set up Mongoose and connect it to your MongoDB instance.
+
+js
+Copy
+// db.js
+const mongoose = require('mongoose');
+
+const connectDB = async () => {
+  try {
+    await mongoose.connect('mongodb://localhost:27017/healthcareSystem', {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log('MongoDB connected successfully');
+  } catch (error) {
+    console.error('Error connecting to MongoDB:', error);
+    process.exit(1);
+  }
+};
+
+module.exports = connectDB;
+In your main server file (e.g., server.js), you can use this setup:
+
+js
+Copy
+// server.js
+const express = require('express');
+const connectDB = require('./db');
+const User = require('./models/User');
+const Appointment = require('./models/Appointment');
+
+const app = express();
+app.use(express.json());
+
+connectDB();
+
+app.get('/', (req, res) => {
+  res.send('Healthcare System API');
+});
+
+// Example of a route
+app.post('/create-user', async (req, res) => {
+  try {
+    const user = new User(req.body);
+    await user.save();
+    res.status(201).send(user);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
+
+// Start server
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
