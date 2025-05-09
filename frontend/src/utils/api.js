@@ -1,7 +1,7 @@
 import axios from 'axios';
 import feather from 'feather-icons';
 
-const BASE_URL = 'http://localhost:5000/api';
+const BASE_URL = process.env.REACT_APP_API_URL || 'https://weheal-1.onrender.com/api';
 const AUTH_URL = `${BASE_URL}/auth`;
 
 // Create axios instances with credentials support
