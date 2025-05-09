@@ -20,10 +20,14 @@ export const getPatientDashboard = async (req, res) => {
       });
     }
 
+    // Set to midnight UTC for today
+    const today = new Date();
+    today.setUTCHours(0, 0, 0, 0);
+
     // Get upcoming appointments
     const upcomingAppointments = await Appointment.find({
       patientId: user._id,
-      appointmentDate: { $gte: new Date() },
+      appointmentDate: { $gte: today },
       status: { $ne: 'cancelled' }
     })
     .populate('doctorId', 'name doctorDetails')
@@ -39,11 +43,14 @@ export const getPatientDashboard = async (req, res) => {
     const formattedAppointments = upcomingAppointments.map(apt => ({
       _id: apt._id,
       doctor: `Dr. ${apt.doctorId.name}`,
-      date: new Date(apt.date).toLocaleDateString(),
+      date: apt.appointmentDate,
       time: `${apt.startTime} - ${apt.endTime}`,
       type: apt.type,
       status: apt.status,
-      specialization: apt.doctorId.doctorDetails?.specialization || ''
+      specialization: apt.doctorId.doctorDetails?.specialization || '',
+      videoCallStatus: apt.videoCallStatus,
+      videoCallStartTime: apt.videoCallStartTime,
+      videoCallEndTime: apt.videoCallEndTime
     }));
 
     // Get patient dashboard data

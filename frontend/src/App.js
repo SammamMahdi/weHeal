@@ -12,6 +12,7 @@ import DoctorDashboard from "./pages/dashboards/DoctorDashboard";
 import ClinicStaffDashboard from "./pages/dashboards/ClinicStaffDashboard";
 import AdminDashboard from "./pages/dashboards/AdminDashboard";
 import AdminUserDetails from "./pages/dashboards/AdminUserDetails";
+import VideoCall from './components/VideoCall';
 
 
 const App = () => {
@@ -33,6 +34,7 @@ const App = () => {
           <Route path="/dashboard/clinic-staff" element={<ClinicStaffDashboard />} />
           <Route path="/dashboard/admin" element={<AdminDashboard />} />
           <Route path="/dashboard/admin/user/:id" element={<AdminUserDetails />} />
+          <Route path="/video-call/:appointmentId" element={<VideoCall />} />
         </Route>
 
         {/* Catch all - redirect to login */}

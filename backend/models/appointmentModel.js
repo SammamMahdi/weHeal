@@ -43,7 +43,15 @@ const appointmentSchema = new mongoose.Schema({
   consultationFee: {
     type: Number,
     required: true
-  }
+  },
+  // Add video call related fields
+  videoCallStatus: {
+    type: String,
+    enum: ['not-started', 'in-progress', 'completed'],
+    default: 'not-started'
+  },
+  videoCallStartTime: Date,
+  videoCallEndTime: Date
 }, {
   timestamps: true
 });

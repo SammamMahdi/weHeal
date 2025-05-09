@@ -23,6 +23,10 @@ const DoctorDashboard = () => {
     }
   };
 
+  const handleStartVideoCall = (appointmentId) => {
+    navigate(`/video-call/${appointmentId}`);
+  };
+
   useEffect(() => {
     const fetchDashboardData = async () => {
       try {
@@ -152,9 +156,15 @@ const DoctorDashboard = () => {
                   <span className="mode">{appointment.type}</span>
                   <div className="appointment-actions">
                     {appointment.type === 'Tele-Consult' && (
-                      <button className="btn btn-primary">
+                      <button 
+                        className="btn btn-primary"
+                        onClick={() => handleStartVideoCall(appointment._id)}
+                        disabled={appointment.videoCallStatus === 'completed'}
+                      >
                         <i data-feather="video"></i>
-                        Start Call
+                        {appointment.videoCallStatus === 'in-progress' ? 'Join Call' : 
+                         appointment.videoCallStatus === 'completed' ? 'Call Completed' : 
+                         'Start Call'}
                       </button>
                     )}
                     <button className="btn btn-secondary">
@@ -242,9 +252,15 @@ const DoctorDashboard = () => {
                       </td>
                       <td>
                         {appointment.type === 'Tele-Consult' && (
-                          <button className="btn btn-primary">
+                          <button 
+                            className="btn btn-primary"
+                            onClick={() => handleStartVideoCall(appointment._id)}
+                            disabled={appointment.videoCallStatus === 'completed'}
+                          >
                             <i data-feather="video"></i>
-                            Start Call
+                            {appointment.videoCallStatus === 'in-progress' ? 'Join Call' : 
+                             appointment.videoCallStatus === 'completed' ? 'Call Completed' : 
+                             'Start Call'}
                           </button>
                         )}
                         <button className="btn btn-secondary">

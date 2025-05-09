@@ -11,6 +11,7 @@ import authRoutes from "./routes/authRoute.js";
 import adminRoutes from "./routes/adminRoutes.js";
 import patientRoutes from "./routes/patientRoutes.js";
 import doctorRoutes from "./routes/doctorRoutes.js";
+import videoCallRoutes from "./routes/videoCallRoutes.js";
 
 dotenv.config();
 
@@ -46,6 +47,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/patient", patientRoutes);
 app.use("/api/doctor", doctorRoutes);
+app.use("/api/video-call", videoCallRoutes);
 
 // Production static files
 if (process.env.NODE_ENV === "production") {

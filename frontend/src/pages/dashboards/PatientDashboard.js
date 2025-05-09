@@ -59,6 +59,10 @@ const PatientDashboard = () => {
     }
   };
 
+  const handleStartVideoCall = (appointmentId) => {
+    navigate(`/video-call/${appointmentId}`);
+  };
+
   useEffect(() => {
     const fetchDashboardData = async () => {
       try {
@@ -195,50 +199,69 @@ const PatientDashboard = () => {
               <h2>Upcoming Appointments</h2>
             </div>
             <div className="appointments-grid">
-              {dashboardData.patientData.upcomingAppointments.map((appointment, index) => (
-                <div key={appointment._id || index} className="appointment-card">
-                  <div className="doctor-info">
-                    <img src={`https://i.pravatar.cc/150?img=${index + 1}`} alt={appointment.doctor} />
-                    <div>
-                      <h4>{appointment.doctor}</h4>
-                      <span className="specialization">{appointment.specialization}</span>
+              {dashboardData.patientData.upcomingAppointments && 
+               dashboardData.patientData.upcomingAppointments.length > 0 ? (
+                dashboardData.patientData.upcomingAppointments.map((appointment, index) => {
+                  console.log('Rendering appointment:', appointment);
+                  return (
+                    <div key={appointment._id || index} className="appointment-card">
+                      <div className="doctor-info">
+                        <img src={`https://i.pravatar.cc/150?img=${index + 1}`} alt={appointment.doctor} />
+                        <div>
+                          <h4>{appointment.doctor}</h4>
+                          <span className="specialization">{appointment.specialization}</span>
+                        </div>
+                      </div>
+                      <div className="appointment-details">
+                        <span>
+                          <i data-feather="calendar"></i>
+                          {new Date(appointment.date).toLocaleDateString()}
+                        </span>
+                        <span>
+                          <i data-feather="clock"></i>
+                          {appointment.time}
+                        </span>
+                        <span>
+                          <i data-feather="activity"></i>
+                          {appointment.type === 'tele-consult' ? 'Tele-consultation' : 'In-person Visit'}
+                        </span>
+                        <span className={`status-badge status-${appointment.status.toLowerCase()}`}>
+                          {appointment.status}
+                        </span>
+                      </div>
+                      <div className="appointment-actions">
+                        {appointment.type === 'tele-consult' && 
+                         appointment.status === 'scheduled' && 
+                         new Date(appointment.date) <= new Date() && (
+                          <button 
+                            className="btn btn-primary"
+                            onClick={() => handleStartVideoCall(appointment._id)}
+                            disabled={appointment.videoCallStatus === 'completed'}
+                          >
+                            <i data-feather="video"></i>
+                            {appointment.videoCallStatus === 'in-progress' ? 'Join Call' : 
+                             appointment.videoCallStatus === 'completed' ? 'Call Completed' : 
+                             'Start Call'}
+                          </button>
+                        )}
+                        <button 
+                          className="btn btn-secondary"
+                          onClick={() => handleCancelAppointment(appointment._id)}
+                          disabled={cancellingAppointment || !appointment._id || appointment.status === 'completed'}
+                        >
+                          <i data-feather="x"></i>
+                          {cancellingAppointment ? 'Cancelling...' : 'Cancel'}
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                  <div className="appointment-details">
-                    <span>
-                      <i data-feather="calendar"></i>
-                      {appointment.date}
-                    </span>
-                    <span>
-                      <i data-feather="clock"></i>
-                      {appointment.time}
-                    </span>
-                    <span>
-                      <i data-feather="activity"></i>
-                      {appointment.type === 'tele-consult' ? 'Tele-consultation' : 'In-person Visit'}
-                    </span>
-                    <span className={`status-badge status-${appointment.status.toLowerCase()}`}>
-                      {appointment.status}
-                    </span>
-                  </div>
-                  <div className="appointment-actions">
-                    {appointment.type === 'tele-consult' && (
-                    <button className="btn btn-primary">
-                      <i data-feather="video"></i>
-                      Join Call
-                    </button>
-                    )}
-                    <button 
-                      className="btn btn-secondary"
-                      onClick={() => handleCancelAppointment(appointment._id)}
-                      disabled={cancellingAppointment || !appointment._id}
-                    >
-                      <i data-feather="x"></i>
-                      {cancellingAppointment ? 'Cancelling...' : 'Cancel'}
-                    </button>
-                  </div>
+                  );
+                })
+              ) : (
+                <div className="no-appointments">
+                  <i data-feather="calendar"></i>
+                  <p>No upcoming appointments</p>
                 </div>
-              ))}
+              )}
             </div>
           </div>
         </>
