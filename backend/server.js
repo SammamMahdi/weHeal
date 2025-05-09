@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
-import path from "path";   
+import path from "path";
 
 import { connectDB } from "./db/connectDB.js";
 
@@ -26,20 +26,28 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 // CORS configuration
-app.use(cors({ 
-	origin: ["http://localhost:5173", "http://localhost:3000", "http://localhost:5174", "http://localhost:5175"], 
-	credentials: true,
-	methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-	allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
-}));
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "http://localhost:3000",
+      "http://localhost:5174",
+      "http://localhost:5175",
+      'https://weheal-1.onrender.com',
+    ],
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
+  })
+);
 
 // Add request logging middleware
 app.use((req, res, next) => {
-	console.log('=== Incoming Request ===');
-	console.log('Method:', req.method);
-	console.log('URL:', req.originalUrl);
-	console.log('Headers:', req.headers);
-	next();
+  console.log("=== Incoming Request ===");
+  console.log("Method:", req.method);
+  console.log("URL:", req.originalUrl);
+  console.log("Headers:", req.headers);
+  next();
 });
 
 // API Routes
@@ -51,33 +59,33 @@ app.use("/api/video-call", videoCallRoutes);
 
 // Production static files
 if (process.env.NODE_ENV === "production") {
-	app.use(express.static(path.join(__dirname, "/frontend/dist")));
+  app.use(express.static(path.join(__dirname, "/frontend/dist")));
 
-	app.get("*", (req, res) => {
-		res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
-	});
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
+  });
 }
 
 // 404 handler
 app.use((req, res) => {
-	res.status(404).json({
-		success: false,
-		message: "Route not found"
-	});
+  res.status(404).json({
+    success: false,
+    message: "Route not found",
+  });
 });
 
 // Error handling middleware
 app.use((err, req, res, next) => {
-	console.error('Error:', err);
-	res.status(500).json({ 
-		success: false, 
-		message: "Internal server error",
-		error: process.env.NODE_ENV === 'development' ? err.message : undefined
-	});
+  console.error("Error:", err);
+  res.status(500).json({
+    success: false,
+    message: "Internal server error",
+    error: process.env.NODE_ENV === "development" ? err.message : undefined,
+  });
 });
 
 // Start server
 app.listen(PORT, () => {
-	connectDB();
-	console.log(`Server is running on port: ${PORT}`);
+  connectDB();
+  console.log(`Server is running on port: ${PORT}`);
 });
