@@ -1,5 +1,6 @@
 // models/User.js
 import mongoose from "mongoose";
+import { MEDICAL_SPECIALIZATIONS } from '../constants/specializations.js';
 
 const userSchema = new mongoose.Schema(
   {
@@ -14,28 +15,53 @@ const userSchema = new mongoose.Schema(
     verificationExpires: { type: Date },
     role: {
       type: String,
-      enum: ["Patient", "Doctor", "ClinicStaff", "Admin"],
+      enum: ["Patient", "Doctor", "ClinicStaff", "Admin", "Nurse"],
       required: true,
       default: "Patient",
     },
     password: { type: String, required: true },
     patientDetails: {
-      patientID: String,
       DOB: Date,
       address: String,
       insuranceDetails: mongoose.Schema.Types.Mixed,
     },
     doctorDetails: {
-      doctorID: String,
-      specialization: String,
+      specialization: {
+        type: String,
+        enum: MEDICAL_SPECIALIZATIONS,
+        required: function() { return this.role === 'Doctor'; }
+      },
+      yearsOfExperience: {
+        type: Number,
+        min: 0,
+        max: 50,
+        required: function() { return this.role === 'Doctor'; }
+      },
+      education: [{
+        degree: String,
+        institution: String,
+        year: Number
+      }],
       availabilitySchedule: [String],
+      consultationFee: {
+        type: Number,
+        min: 0,
+        required: function() { return this.role === 'Doctor'; }
+      },
+      bio: {
+        type: String,
+        maxLength: 500
+      },
+      languages: [{
+        type: String,
+        enum: ['English', 'Spanish', 'French', 'German', 'Chinese', 'Hindi', 'Arabic', 'Russian', 'Japanese', 'Korean','Bangla']
+      }]
     },
     clinicStaffDetails: {
-      staffID: String,
       clinicLocation: String,
     },
     adminDetails: {
-      adminID: String,
+      // No specific fields needed as _id will be used
     },
   },
   { timestamps: true }

@@ -1,0 +1,430 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;800&display=swap');
+
+:root {
+  --green:      #007B5D;
+  --orange:     #F0984B;
+  --teal:       #C9E8E8;
+  --cream:      #FFF3DD;
+  --grey:       #8F8F8F;
+  --purple:     #5A58D8;
+  --blue:       #014CC4;
+  --white:      #FFFFFF;
+  --black:      #000000;
+  --bg-light:   #F0F4F8;
+  --shadow:     rgba(0,0,0,0.08);
+  --font:       'Manrope', sans‑serif;
+}
+
+/* RESET & BASE */
+* { box-sizing: border-box; margin:0; padding:0; }
+body {
+  font-family: var(--font);
+  background: var(--bg-light);
+  color: var(--black);
+  display: flex;
+  min-height: 100vh;
+}
+
+/* SHARED SIDEBAR */
+.sidebar {
+  width: 240px;
+  background: var(--white);
+  box-shadow: 2px 0 6px var(--shadow);
+  display: flex; flex-direction: column;
+  padding: 1.5rem 0;
+}
+.sidebar .logo {
+  text-align: center; font-size:1.5rem; font-weight:800;
+  color: var(--green); margin-bottom:2rem;
+}
+.sidebar a {
+  display:flex; align-items:center;
+  padding:.75rem 1.5rem;
+  text-decoration:none; color:var(--black);
+  font-weight:500; gap:.75rem;
+}
+.sidebar a.active,
+.sidebar a:hover {
+  background: var(--teal);
+  color: var(--black);
+}
+
+/* SHARED HEADER */
+.header {
+  height:64px; background:var(--white); flex:1;
+  display:flex; align-items:center; padding:0 2rem;
+  box-shadow:0 2px 4px var(--shadow);
+}
+.header .search { flex:1; margin:0 2rem; }
+.header .search input {
+  width:100%; padding:.5rem 1rem;
+  border:1px solid var(--grey); border-radius:4px;
+}
+.header .profile {
+  display:flex; align-items:center; gap:.75rem;
+}
+.header .profile img {
+  width:36px;height:36px;border-radius:50%;
+}
+.header .profile span { font-weight:600; }
+
+/* SHARED MAIN WRAPPER */
+.main-wrapper { flex:1; display:flex; flex-direction:column; }
+.main { padding:2rem; overflow-y:auto; }
+.main h1 { margin-bottom:1.5rem; font-weight:600; }
+
+/* SHARED BUTTONS */
+.btn {
+  font-weight:600; border:none; padding:.5rem 1rem;
+  border-radius:4px; cursor:pointer;
+}
+.btn-primary   { background:var(--green);  color:var(--white); }
+.btn-secondary { background:var(--orange); color:var(--white); }
+
+/* ========================= PATIENT DASHBOARD ========================= */
+.patient .widgets-row {
+  display:flex; gap:1rem; margin-bottom:2rem;
+}
+.patient .widget {
+  flex:1; background:var(--white);
+  border-radius:8px; box-shadow:0 2px 8px var(--shadow);
+  padding:1rem;
+}
+.patient .widget h3 {
+  color:var(--grey); margin-bottom:.5rem;
+}
+.patient .widget ul { margin-left:1rem; margin-bottom:1rem; }
+.patient .widget p { margin-bottom:1rem; }
+.patient .actions-row {
+  display:flex; flex-wrap:wrap; gap:.75rem;
+  margin-bottom:2rem;
+}
+.patient .appt-carousel {
+  display:flex; gap:1rem; overflow-x:auto;
+  margin-bottom:2rem; padding-bottom:.5rem;
+}
+.patient .appt-card {
+  flex:0 0 200px; background:var(--white);
+  border-radius:8px; box-shadow:0 2px 8px var(--shadow);
+  padding:1rem; display:flex; flex-direction:column;
+}
+.patient .appt-card img {
+  width:40px;height:40px;border-radius:50%;
+  margin-bottom:.5rem;
+}
+.patient .appt-card h4 { margin-bottom:.25rem; font-weight:600; }
+.patient .appt-card span { font-size:.85rem; color:var(--grey); }
+.patient .appt-card .btn { margin-top:.5rem; }
+.patient .content-split {
+  display:flex; gap:2rem; margin-top:2rem;
+}
+.patient .table-container,
+.patient .details-panel {
+  background:var(--white); border-radius:8px;
+  box-shadow:0 2px 8px var(--shadow); padding:1rem;
+}
+.patient .table-container { flex:2; }
+.patient .details-panel { flex:1; }
+.patient .table-header {
+  display:flex; justify-content:space-between;
+  margin-bottom:1rem;
+}
+.patient .table-header input {
+  flex:1; padding:.5rem 1rem;
+  border:1px solid var(--grey); border-radius:4px;
+}
+.patient .table-header .actions button {
+  background:transparent; border:none; cursor:pointer;
+  margin-left:.5rem;
+}
+.patient .app-table {
+  width:100%; border-collapse:collapse;
+}
+.patient .app-table th,
+.patient .app-table td {
+  padding:.75rem 1rem; border-bottom:1px solid var(--bg-light);
+  font-size:.9rem;
+}
+.patient .app-table th {
+  background:var(--cream); font-weight:600;
+}
+.patient .details-panel h3 {
+  margin-bottom:1rem; font-weight:600;
+}
+.patient .details-panel p { margin-bottom:.5rem; }
+.patient .details-panel .btn {
+  width:100%; margin-top:.75rem;
+}
+
+/* ========================= DOCTOR DASHBOARD ========================= */
+.doctor .actions-top {
+  display:flex; gap:1rem; margin:1.5rem 0;
+}
+.doctor .schedule-section h2 {
+  margin-bottom:.75rem; color:var(--grey);
+}
+.doctor .timeline {
+  display:flex; gap:1rem; overflow-x:auto;
+  margin-bottom:2rem; padding-bottom:.5rem;
+}
+.doctor .timeline-item {
+  flex:0 0 160px; padding:1rem; background:var(--white);
+  border-left:4px solid var(--green);
+  border-radius:4px; box-shadow:0 2px 6px var(--shadow);
+}
+.doctor .timeline-item .time {
+  font-weight:600; margin-bottom:.5rem; display:block;
+}
+.doctor .timeline-item .details { font-size:.9rem; }
+.doctor .timeline-item .mode {
+  display:block; color:var(--grey);
+  font-size:.8rem; margin-top:.25rem;
+}
+.doctor .summary-row {
+  display:flex; gap:1rem; margin-bottom:2rem;
+}
+.doctor .summary-card {
+  flex:1; padding:1rem; border-radius:8px;
+  color:var(--white); position:relative;
+}
+.doctor .summary-card h3 { margin-bottom:.5rem; font-size:.9rem; }
+.doctor .summary-card .value {
+  font-size:1.5rem; font-weight:700;
+}
+.doctor .summary-card .sub {
+  font-size:.8rem; margin-top:.25rem;
+}
+.doctor .card-queue     { background:var(--teal);   }
+.doctor .card-prescribe { background:var(--orange); }
+.doctor .card-messages  { background:var(--purple); }
+.doctor .content-split {
+  display:flex; gap:2rem; margin-top:2rem;
+}
+.doctor .table-container {
+  flex:2; background:var(--white);
+  border-radius:8px; box-shadow:0 2px 8px var(--shadow);
+  padding:1rem;
+}
+.doctor .table-header {
+  display:flex; justify-content:space-between;
+  margin-bottom:1rem;
+}
+.doctor .table-header input {
+  flex:1; padding:.5rem 1rem;
+  border:1px solid var(--grey); border-radius:4px;
+}
+.doctor .table-header .actions button {
+  background:transparent; border:none; cursor:pointer;
+  margin-left:.5rem;
+}
+.doctor .app-table {
+  width:100%; border-collapse:collapse;
+}
+.doctor .app-table th,
+.doctor .app-table td {
+  padding:.75rem 1rem; border-bottom:1px solid var(--bg-light);
+  font-size:.9rem;
+}
+.doctor .app-table th {
+  background:var(--cream); font-weight:600;
+}
+.doctor .alerts-panel {
+  flex:1; background:var(--white);
+  border-radius:8px; box-shadow:0 2px 6px var(--shadow);
+  padding:1rem;
+}
+.doctor .alerts-panel h3 { margin-bottom:.75rem; }
+.doctor .critical-actions {
+  display:flex; flex-direction:column; gap:.75rem; margin-top:1rem;
+}
+.btn-critical {
+  background: var(--blue);
+  color: var(--white);
+  border: none;
+  padding: .75rem;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn-critical i { margin-right:.5rem; }
+
+
+/* ========================= CLINIC STAFF DASHBOARD ========================= */
+.staff .widgets-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.staff .widget {
+  flex: 1;
+  background: var(--white);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px var(--shadow);
+  padding: 1rem;
+}
+.staff .widget h3 {
+  color: var(--grey);
+  margin-bottom: .5rem;
+}
+.staff .widget p {
+  margin-bottom: .5rem;
+}
+.staff .table-container {
+  background: var(--white);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px var(--shadow);
+  padding: 1rem;
+  margin-bottom: 2rem;
+}
+.staff .table-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.staff .table-header input {
+  flex: 1;
+  padding: .5rem 1rem;
+  border: 1px solid var(--grey);
+  border-radius: 4px;
+}
+.staff .table-header .actions button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  margin-left: .5rem;
+}
+.staff .app-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.staff .app-table th,
+.staff .app-table td {
+  padding: .75rem 1rem;
+  border-bottom: 1px solid var(--bg-light);
+  font-size: .9rem;
+}
+.staff .app-table th {
+  background: var(--cream);
+  font-weight: 600;
+}
+
+/* Staff Quick‑Actions row */
+.staff .actions-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+  margin-top: 1rem;
+}
+
+/* ======================= ADMINISTRATOR DASHBOARD ======================= */
+.admin .widgets-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.admin .widget {
+  flex: 1;
+  background: var(--white);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px var(--shadow);
+  padding: 1rem;
+}
+.admin .widget h3 {
+  color: var(--grey);
+  margin-bottom: .5rem;
+}
+.admin .widget p {
+  margin-bottom: .5rem;
+}
+
+/* Admin Quick‑Actions row */
+.admin .actions-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+  margin-top: 1rem;
+}
+/* ===== Clinic Staff – distinct grid layout & color accents ===== */
+.staff .widgets-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.staff .widget {
+  padding: 1rem;
+}
+.staff .widget:nth-child(1) {
+  background: var(--teal);
+  color: var(--white);
+}
+.staff .widget:nth-child(2),
+.staff .widget:nth-child(3) {
+  background: var(--cream);
+}
+.staff .widget:nth-child(4) {
+  background: var(--green);
+  color: var(--white);
+}
+
+/* ===== Administrator – circular metric tiles ===== */
+.admin .widgets-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.admin .widget {
+  flex: 1;
+  padding: 2rem 1rem;
+  text-align: center;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px var(--shadow);
+}
+.admin .widget:nth-child(1) { background: var(--purple); color: var(--white); }
+.admin .widget:nth-child(2) { background: var(--blue);   color: var(--white); }
+.admin .widget:nth-child(3) { background: var(--orange); color: var(--white); }
+.admin .widget:nth-child(4) { background: var(--green);  color: var(--white); }
+/* ===== ADMINISTRATOR – formal cards + charts ===== */
+
+.admin .widgets-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.admin .widget {
+  background: var(--white);
+  border-left: 4px solid var(--blue);
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px var(--shadow);
+}
+.admin .widget h3 {
+  margin-bottom: 0.75rem;
+  color: var(--grey);
+}
+
+/* Charts section */
+.admin .charts-section {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+/* === Admin charts: keep 2:1 aspect ratio === */
+.admin .chart-card {
+  position: relative;
+  width: 100%;
+  padding-bottom: 50%;          /* height = 50% of width → 2:1 */
+}
+.admin .chart-card canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+}

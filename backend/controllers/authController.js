@@ -10,17 +10,23 @@ import {
 } from "../nodemailer/email.js";
 
 export const signup = async (req, res) => {
-  const { name, email, password, phone, role } = req.body;
+  const { name, email, password, phone, role, doctorDetails } = req.body;
 
   try {
     if (!name || !email || !password || !phone || !role) {
       return res.status(400).json({ message: "All fields are required" });
     }
+
+    // Additional validation for doctor role
+    if (role === "Doctor" && (!doctorDetails || !doctorDetails.specialization || !doctorDetails.yearsOfExperience || !doctorDetails.consultationFee)) {
+      return res.status(400).json({ message: "Doctor details are required" });
+    }
+
     const userAlreadyExists = await User.findOne({ email });
     if (userAlreadyExists) {
       return res
         .status(400)
-        .json({ success: False, message: "User already exists" });
+        .json({ success: false, message: "User already exists" });
     }
 
     const hashedPassword = await bcryptjs.hash(password, 10);
@@ -28,7 +34,7 @@ export const signup = async (req, res) => {
       100000 + Math.random() * 900000
     ).toString();
 
-    const user = await User.create({
+    const userData = {
       name,
       email,
       password: hashedPassword,
@@ -36,8 +42,19 @@ export const signup = async (req, res) => {
       role,
       verificationToken,
       verificationExpires: Date.now() + 24 * 3600000, // 1 hour
-    });
+    };
 
+    // Add doctor details if role is Doctor
+    if (role === "Doctor") {
+      userData.doctorDetails = {
+        specialization: doctorDetails.specialization,
+        yearsOfExperience: doctorDetails.yearsOfExperience,
+        consultationFee: doctorDetails.consultationFee,
+        education: doctorDetails.education || []
+      };
+    }
+
+    const user = await User.create(userData);
     await user.save();
 
     //jwt token generation
@@ -96,36 +113,43 @@ export const verifyEmail = async (req, res) => {
 
 export const login = async (req, res) => {
   const { email, password } = req.body;
+
   try {
+    if (!email || !password) {
+      return res.status(400).json({ success: false, message: "All fields are required" });
+    }
+
     const user = await User.findOne({ email });
     if (!user) {
-      return res
-        .status(400)
-        .json({ success: false, message: "Invalid credentials" });
+      return res.status(400).json({ success: false, message: "Invalid credentials" });
     }
+
     const isPasswordValid = await bcryptjs.compare(password, user.password);
     if (!isPasswordValid) {
-      return res
-        .status(400)
-        .json({ success: false, message: "Invalid credentials" });
+      return res.status(400).json({ success: false, message: "Invalid credentials" });
     }
 
-    generateTokenAndSetCookie(res, user._id);
+    if (!user.isVerified) {
+      return res.status(400).json({ success: false, message: "Please verify your email first" });
+    }
 
-    user.lastLogin = new Date();
-    await user.save();
+    const token = generateTokenAndSetCookie(res, user._id);
 
     res.status(200).json({
       success: true,
-      message: "Logged in successfully",
+      message: "Login successful",
+      token,
       user: {
-        ...user._doc,
-        password: undefined,
-      },
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+        isVerified: user.isVerified
+      }
     });
   } catch (error) {
-    console.log("Error in login ", error);
-    res.status(400).json({ success: false, message: error.message });
+    console.log("Error in login controller", error.message);
+    res.status(500).json({ success: false, message: "Internal Server Error" });
   }
 };
 
@@ -147,7 +171,7 @@ export const forgotPassword = async (req, res) => {
 
     // Generate reset token
     const resetToken = crypto.randomBytes(20).toString("hex");
-    const resetTokenExpiresAt = Date.now() + 1 * 60 * 60 * 1000; // 1 hour
+    // const resetTokenExpiresAt = Date.now() + 1 * 60 * 60 * 1000; // 1 hour
 
     user.resetPasswordToken = resetToken;
     user.resetPasswordExpiresAt = resetTokenExpiresAt;

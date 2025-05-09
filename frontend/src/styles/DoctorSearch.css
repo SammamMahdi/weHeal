@@ -1,0 +1,521 @@
+.doctor-search {
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  background-color: var(--background-color);
+}
+
+.search-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.back-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: white;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px var(--shadow-color);
+  color: var(--text-color);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.back-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px var(--shadow-color);
+}
+
+.search-header h2 {
+  font-size: 2rem;
+  color: var(--text-color);
+  margin: 0;
+  font-weight: 700;
+}
+
+.search-container {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px var(--shadow-color);
+  margin-bottom: 2rem;
+  width: 100%;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.search-form {
+  width: 100%;
+}
+
+.search-inputs {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-end;
+}
+
+.search-field {
+  flex: 1;
+}
+
+.search-field label {
+  display: block;
+  color: var(--text-color);
+  font-weight: 500;
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+}
+
+.search-field input,
+.search-field select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background-color: white;
+}
+
+.search-field input:focus,
+.search-field select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+}
+
+.doctors-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.doctor-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px var(--shadow-color);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+}
+
+.doctor-card:hover {
+  transform: translateY(-2px);
+}
+
+.doctor-avatar {
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+.doctor-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.doctor-info {
+  padding: 0 1.5rem;
+  flex: 1;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1rem;
+  align-items: center;
+}
+
+.doctor-info-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.doctor-info h3 {
+  color: var(--text-color);
+  font-size: 1.25rem;
+  margin: 0;
+  font-weight: 600;
+}
+
+.doctor-info p {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-light);
+  margin: 0;
+  font-size: 0.875rem;
+}
+
+.doctor-info i {
+  color: var(--primary-color);
+  width: 16px;
+  height: 16px;
+}
+
+.doctor-info .specialization {
+  color: var(--primary-color);
+  font-weight: 500;
+}
+
+.doctor-info .bio {
+  grid-column: 1 / -1;
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--border-color);
+  line-height: 1.5;
+  font-size: 0.875rem;
+  color: var(--text-light);
+}
+
+.doctor-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  justify-self: end;
+}
+
+.book-btn {
+  padding: 0.5rem 1rem;
+  white-space: nowrap;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem;
+}
+
+.loading-container p {
+  color: var(--text-light);
+}
+
+.no-results {
+  text-align: center;
+  padding: 3rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px var(--shadow-color);
+}
+
+.no-results i {
+  font-size: 2rem;
+  color: var(--text-light);
+  margin-bottom: 1rem;
+}
+
+.no-results p {
+  color: var(--text-color);
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.no-results small {
+  color: var(--text-light);
+}
+
+@media (max-width: 768px) {
+  .doctor-search {
+    padding: 1rem;
+  }
+
+  .search-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .search-inputs {
+    grid-template-columns: 1fr;
+  }
+
+  .doctor-card {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .doctor-info {
+    padding: 1rem 0 0;
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .doctor-info p {
+    justify-content: center;
+  }
+
+  .doctor-actions {
+    justify-self: center;
+  }
+} 
+
+.availability-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: white;
+  border-radius: 0.75rem;
+  padding: 2rem;
+  width: 90%;
+  max-width: 800px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.modal-header h3 {
+  margin: 0;
+  color: #2c3e50;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  color: #6b7280;
+  font-size: 1.5rem;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  background-color: #f3f4f6;
+}
+
+.close-btn:hover {
+  background-color: #e5e7eb;
+  color: #2c3e50;
+}
+
+.close-btn i {
+  width: 20px;
+  height: 20px;
+  stroke-width: 2;
+}
+
+/* Add a fallback X symbol if the icon doesn't load */
+.close-btn:empty::before {
+  content: "×";
+  font-size: 24px;
+  line-height: 1;
+}
+
+.days-nav {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.day-button {
+  padding: 0.5rem 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  background-color: white;
+  color: #4b5563;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.day-button:hover {
+  background-color: #f3f4f6;
+}
+
+.day-button.active {
+  background-color: #3b82f6;
+  color: white;
+  border-color: #3b82f6;
+}
+
+.time-slots {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.time-slot {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  background-color: #f3f4f6;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.time-slot.available {
+  background-color: #dcfce7;
+}
+
+.time-slot .time {
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: #166534;
+}
+
+.select-slot {
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  font-size: 0.875rem;
+}
+
+@media (max-width: 640px) {
+  .modal-content {
+    width: 95%;
+    padding: 1rem;
+  }
+
+  .days-nav {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+    margin: -0.5rem -1rem 1.5rem -1rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .day-button {
+    white-space: nowrap;
+  }
+
+  .time-slots {
+    grid-template-columns: 1fr;
+  }
+}
+
+.no-slots,
+.no-availability {
+  text-align: center;
+  padding: 2rem;
+  background-color: #f9fafb;
+  border-radius: 0.5rem;
+  color: #6b7280;
+}
+
+.no-slots p,
+.no-availability p {
+  margin: 0;
+  font-size: 0.875rem;
+}
+
+.date-picker {
+  margin-bottom: 1.5rem;
+}
+
+.date-picker label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #4b5563;
+  font-weight: 500;
+}
+
+.date-picker input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+}
+
+.availability-info {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background-color: #f9fafb;
+  border-radius: 0.5rem;
+}
+
+.availability-info p {
+  margin: 0.5rem 0;
+  color: #4b5563;
+}
+
+.availability-info .consultation-fee {
+  font-weight: 500;
+  color: #166534;
+}
+
+.booking-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.booking-details {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background-color: #f9fafb;
+  border-radius: 0.5rem;
+}
+
+.booking-details p {
+  margin: 0.5rem 0;
+  color: #4b5563;
+}
+
+.booking-details strong {
+  color: #2c3e50;
+}
+
+.appointment-type {
+  margin-bottom: 1.5rem;
+}
+
+.appointment-type label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #4b5563;
+  font-weight: 500;
+}
+
+.appointment-type select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+}
+
+.booking-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1.5rem;
+} 

@@ -1,0 +1,346 @@
+.profile-container {
+  max-width: 2000px;
+  margin: 2rem auto;
+  padding: 2.5rem 4rem;
+  background-color: white;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.profile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid #f3f4f6;
+}
+
+.profile-header h2 {
+  margin: 0;
+  color: #1f2937;
+  font-size: 1.875rem;
+  font-weight: 600;
+}
+
+.error-message {
+  background-color: #fee2e2;
+  color: #dc2626;
+  padding: 1.25rem;
+  border-radius: 0.75rem;
+  margin-bottom: 2rem;
+  font-weight: 500;
+}
+
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  width: 100%;
+  max-width: 1800px;
+  margin: 0 auto;
+}
+
+.form-section {
+  border: 1px solid #e5e7eb;
+  border-radius: 1rem;
+  padding: 3rem 4rem;
+  background-color: #ffffff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.form-section h3 {
+  margin: 0 0 2rem 0;
+  color: #374151;
+  font-size: 1.75rem;
+  font-weight: 600;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #f3f4f6;
+}
+
+.form-group {
+  margin-bottom: 2rem;
+  max-width: 100%;
+}
+
+.form-group:last-child {
+  margin-bottom: 0;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 1rem;
+  color: #4b5563;
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.75rem;
+  font-size: 1.1rem;
+  color: #1f2937;
+  background-color: white;
+  transition: border-color 0.2s ease;
+}
+
+.form-group textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.form-group input:disabled,
+.form-group select:disabled,
+.form-group textarea:disabled {
+  background-color: #f9fafb;
+  cursor: not-allowed;
+  border-color: #e5e7eb;
+}
+
+.form-group small {
+  display: block;
+  margin-top: 0.5rem;
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+.education-entry {
+  display: grid;
+  grid-template-columns: 2.5fr 3.5fr 1.2fr 120px;
+  gap: 3rem;
+  align-items: flex-end;
+  padding: 2.5rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 1rem;
+  margin-bottom: 2rem;
+  background-color: #f9fafb;
+}
+
+.education-entry .form-group {
+  margin-bottom: 0;
+}
+
+.education-entry .btn-danger {
+  height: 51px; /* Match input height */
+  padding: 0;
+  width: 120px;
+  background-color: #ef4444;
+  color: white;
+  border: none;
+  border-radius: 0.75rem;
+  font-weight: 500;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.education-entry .btn-danger:hover {
+  background-color: #dc2626;
+  transform: translateY(-1px);
+}
+
+.languages-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+  background-color: #f9fafb;
+  border-radius: 1rem;
+}
+
+.language-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  border-radius: 0.75rem;
+}
+
+.language-checkbox:hover {
+  background-color: #f3f4f6;
+}
+
+.language-checkbox input[type="checkbox"] {
+  width: 1.25rem;
+  height: 1.25rem;
+  cursor: pointer;
+  border-radius: 0.25rem;
+  border: 2px solid #d1d5db;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 2px solid #f3f4f6;
+}
+
+.btn {
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 0.75rem;
+  font-weight: 500;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: #2563eb;
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background-color: #f3f4f6;
+  color: #4b5563;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background-color: #e5e7eb;
+  transform: translateY(-1px);
+}
+
+.btn-danger {
+  background-color: #ef4444;
+  color: white;
+}
+
+.btn-danger:hover:not(:disabled) {
+  background-color: #dc2626;
+  transform: translateY(-1px);
+}
+
+.loading-spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid #f3f4f6;
+  border-top: 4px solid #3b82f6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 3rem auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@media (max-width: 1800px) {
+  .profile-container {
+    padding: 2rem 3rem;
+  }
+  
+  .form-section {
+    padding: 2.5rem 3rem;
+  }
+  
+  .education-entry {
+    grid-template-columns: 2fr 3fr 1.2fr 120px;
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 1400px) {
+  .profile-container {
+    padding: 2rem;
+  }
+  
+  .form-section {
+    padding: 2rem;
+  }
+  
+  .education-entry {
+    grid-template-columns: 2fr 2fr 1fr 120px;
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .form-section {
+    padding: 1.75rem;
+  }
+  
+  .education-entry {
+    grid-template-columns: 1fr 1fr 1fr 100px;
+    gap: 1.25rem;
+  }
+  
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 1rem 1.25rem;
+    font-size: 1rem;
+  }
+  
+  .education-entry .btn-danger {
+    width: 100px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .profile-container {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .form-section {
+    padding: 1.5rem;
+  }
+
+  .education-entry {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1.5rem;
+  }
+
+  .education-entry .form-group {
+    margin-bottom: 1rem;
+  }
+
+  .education-entry .btn-danger {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+
+  .languages-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .language-checkbox {
+    padding: 0.75rem;
+    font-size: 1rem;
+  }
+} 

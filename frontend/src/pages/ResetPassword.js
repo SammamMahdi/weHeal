@@ -1,7 +1,8 @@
-// src/components/ResetPassword.js
+// src/pages/ResetPassword.js
 import React, { useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { resetPassword } from '../utils/api'; // Assuming resetPassword API method is implemented
+import '../styles/Auth.css';
 
 const ResetPassword = () => {
   const [password, setPassword] = useState('');
@@ -51,28 +52,39 @@ const ResetPassword = () => {
   };
 
   return (
-    <div className="reset-password-container">
-      <h2>Reset Password</h2>
-      <form onSubmit={handleSubmit} className="reset-password-form">
-        <input
-          type="password"
-          name="password"
-          placeholder="New Password"
-          value={password}
-          onChange={handlePasswordChange}
-          required
-        />
-        <input
-          type="password"
-          name="confirmPassword"
-          placeholder="Confirm Password"
-          value={confirmPassword}
-          onChange={handlePasswordChange}
-          required
-        />
-        <button type="submit" disabled={isLoading}>Reset Password</button>
-      </form>
-      {message && <p className="message">{message}</p>}
+    <div className="auth-container">
+      <div className="auth-form-container">
+        <h2>Set New Password</h2>
+        <form onSubmit={handleSubmit} className="auth-form">
+          <input
+            type="password"
+            name="password"
+            placeholder="New Password"
+            value={password}
+            onChange={handlePasswordChange}
+            required
+          />
+          <input
+            type="password"
+            name="confirmPassword"
+            placeholder="Confirm New Password"
+            value={confirmPassword}
+            onChange={handlePasswordChange}
+            required
+          />
+          <button type="submit" disabled={isLoading}>
+            {isLoading ? "Resetting..." : "Reset Password"}
+          </button>
+          <div className="auth-links">
+            Remember your password? <Link to="/login">Login</Link>
+          </div>
+        </form>
+        {message && (
+          <p className={`message ${message.includes("success") ? "success" : "error"}`}>
+            {message}
+          </p>
+        )}
+      </div>
     </div>
   );
 };

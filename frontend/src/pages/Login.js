@@ -1,14 +1,15 @@
 // src/pages/Login.js
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate for redirection
-import { loginUser } from "../utils/api"; // Assuming loginUser API method is implemented
+import { useNavigate, Link } from "react-router-dom";
+import { loginUser } from "../utils/api";
+import "../styles/Auth.css";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate(); // hook to handle navigation
+  const navigate = useNavigate();
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -31,8 +32,7 @@ const Login = () => {
       const response = await loginUser(email, password);
       if (response.success) {
         setMessage("Login successful!");
-        // Redirect to homepage or dashboard after successful login
-        navigate("/dashboard"); // Redirects to /dashboard after successful login
+        navigate(`/dashboard/${response.user.role.toLowerCase()}`);
       } else {
         setMessage(response.message || "Login failed");
       }
@@ -43,49 +43,42 @@ const Login = () => {
     }
   };
 
-  // Handle Forgot Password button click (redirect to /forgot-password)
-  const handleForgotPasswordClick = () => {
-    navigate("/forgot-password"); // Redirect to the Forgot Password page
-  };
-  const handleSignupClick = () => {
-    navigate("/"); // Redirect to the Signup page
-  };
-
   return (
-    <div className="login-container">
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit} className="login-form">
-        <input
-          type="email"
-          name="email"
-          placeholder="Enter your email"
-          value={email}
-          onChange={handleEmailChange}
-          required
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Enter your password"
-          value={password}
-          onChange={handlePasswordChange}
-          required
-        />
-        <button type="submit" disabled={isLoading}>
-          Login
-        </button>
-        <button
-          onClick={handleForgotPasswordClick}
-          className="forgot-password-btn"
-        >
-          Forgot Password?
-        </button>
-        <button onClick={handleSignupClick} className="signup-btn">
-          Sign Up
-        </button>
-      </form>
-
-      {message && <p className="message">{message}</p>}
+    <div className="auth-container">
+      <div className="auth-form-container">
+        <h2>Welcome to WeHeal</h2>
+        <form onSubmit={handleSubmit} className="auth-form">
+          <input
+            type="email"
+            name="email"
+            placeholder="Enter your email"
+            value={email}
+            onChange={handleEmailChange}
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Enter your password"
+            value={password}
+            onChange={handlePasswordChange}
+            required
+          />
+          <button type="submit" disabled={isLoading}>
+            {isLoading ? "Logging in..." : "Login"}
+          </button>
+          <div className="auth-links">
+            <Link to="/forgot-password">Forgot Password?</Link>
+            <span>|</span>
+            <Link to="/">Sign Up</Link>
+          </div>
+        </form>
+        {message && (
+          <p className={`message ${message.includes("success") ? "success" : "error"}`}>
+            {message}
+          </p>
+        )}
+      </div>
     </div>
   );
 };

@@ -1,0 +1,153 @@
+.availability-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.availability-container h2 {
+  margin-bottom: 2rem;
+  color: #2c3e50;
+}
+
+.error-message {
+  background-color: #fee2e2;
+  color: #dc2626;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.days-nav {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.day-button {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: #f3f4f6;
+  color: #4b5563;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.day-button:hover {
+  background-color: #e5e7eb;
+}
+
+.day-button.active {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.day-button.non-working {
+  background-color: #e5e7eb;
+  color: #9ca3af;
+}
+
+.day-schedule {
+  background-color: white;
+  border-radius: 0.75rem;
+  padding: 2rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.day-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.day-header h3 {
+  margin: 0;
+  color: #2c3e50;
+}
+
+.working-day-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.working-day-toggle input[type="checkbox"] {
+  width: 1.25rem;
+  height: 1.25rem;
+  cursor: pointer;
+}
+
+.time-slots {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.time-slot {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  background-color: #f3f4f6;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.time-slot:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.time-slot.available {
+  background-color: #dcfce7;
+  color: #166534;
+}
+
+.time-slot.disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.time-slot .time {
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.time-slot .status {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.time-slot.available .status {
+  color: #166534;
+}
+
+@media (max-width: 640px) {
+  .availability-container {
+    padding: 1rem;
+  }
+
+  .days-nav {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+    margin: -0.5rem -1rem 1.5rem -1rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .day-button {
+    white-space: nowrap;
+  }
+
+  .day-schedule {
+    padding: 1rem;
+  }
+
+  .time-slots {
+    grid-template-columns: 1fr;
+  }
+} 

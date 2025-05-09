@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>WeHeal – Clinic Staff Dashboard</title>
+  <link rel="stylesheet" href="dashboard.css"/>
+  <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body class="staff">
+
+  <aside class="sidebar">
+    <div class="logo">WeHeal</div>
+    <a href="#" class="active"><i data-feather="calendar"></i> Manage Appointments</a>
+    <a href="#"><i data-feather="user-check"></i> Patient Check‑In</a>
+    <a href="#"><i data-feather="bar-chart-2"></i> Generate Reports</a>
+    <a href="#"><i data-feather="alert-triangle"></i> Emergency Desk</a>
+  </aside>
+
+  <div class="main-wrapper">
+    <header class="header">
+      <div class="search">
+        <input type="text" placeholder="Search appointments, patients…"/>
+      </div>
+      <div class="profile">
+        <img src="https://i.pravatar.cc/36?img=10" alt="avatar"/>
+        <span>Clinic Staff</span>
+      </div>
+    </header>
+
+    <div class="main">
+      <h1>Welcome, Clinic Staff.</h1>
+
+      <!-- 1. Widgets -->
+      <div class="widgets-row">
+        <div class="widget">
+          <h3>Check‑In Queue</h3>
+          <p><strong>23</strong> Arrived / <strong>5</strong> No‑shows</p>
+        </div>
+        <div class="widget">
+          <h3>Daily Appointments</h3>
+          <p><strong>45</strong> Scheduled</p>
+        </div>
+        <div class="widget">
+          <h3>Emergency Requests</h3>
+          <p><strong>3</strong> Pending</p>
+        </div>
+        <div class="widget">
+          <h3>Reports Snapshot</h3>
+          <p>Admissions: <strong>12</strong><br/>
+             Cancellations: <strong>4</strong><br/>
+             Revenue: <strong>$1,200</strong></p>
+        </div>
+      </div>
+
+      <!-- 2. Daily Appointment Overview -->
+      <h2 style="margin-bottom:1rem; color:var(--grey)">Daily Appointment Overview</h2>
+      <div class="table-container">
+        <div class="table-header">
+          <input type="text" placeholder="Filter…"/>
+          <div class="actions">
+            <button title="Download CSV"><i data-feather="download"></i></button>
+            <button title="Refresh"><i data-feather="refresh-ccw"></i></button>
+          </div>
+        </div>
+        <table class="app-table">
+          <thead>
+            <tr>
+              <th>Doctor</th>
+              <th>Time Slot</th>
+              <th>Patient</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Dr. Smith</td><td>09:00–09:30</td><td>John Doe</td></tr>
+            <tr><td>Dr. Lee</td><td>09:30–10:00</td><td>Jane Roe</td></tr>
+            <!-- …more rows… -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 3. Key Actions -->
+      <div class="actions-row">
+        <button class="btn btn-primary">Confirm Check‑In</button>
+        <button class="btn btn-secondary">Mark No‑Show</button>
+        <button class="btn btn-primary">Reschedule / Cancel</button>
+        <button class="btn btn-secondary">Assign Room / Doctor</button>
+        <button class="btn btn-primary">Generate Daily Report</button>
+        <button class="btn btn-secondary">View Emergency Requests</button>
+      </div>
+    </div>
+  </div>
+
+  <script>feather.replace()</script>
+</body>
+</html>

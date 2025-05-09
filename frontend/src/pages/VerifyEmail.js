@@ -1,7 +1,8 @@
 // src/pages/VerifyEmail.js
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Importing useNavigate for redirection
+import { useNavigate, Link } from 'react-router-dom'; // Importing useNavigate for redirection and Link for navigation
 import { verifyEmail } from '../utils/api'; // Assuming verifyEmail API method is implemented
+import '../styles/Auth.css';
 
 const VerifyEmail = () => {
   const navigate = useNavigate();  // Hook for programmatic navigation
@@ -40,20 +41,38 @@ const VerifyEmail = () => {
   };
 
   return (
-    <div className="verify-email-container">
-      <h2>Verify Your Email</h2>
-      <form onSubmit={handleSubmit} className="verify-email-form">
-        <input
-          type="text"
-          name="code"
-          placeholder="Enter verification code"
-          value={code}
-          onChange={handleCodeChange}
-          required
-        />
-        <button type="submit" disabled={isLoading}>Verify Email</button>
-      </form>
-      {message && <p className="message">{message}</p>}
+    <div className="auth-container">
+      <div className="auth-form-container">
+        <h2>Verify Your Email</h2>
+        <p className="auth-description">
+          Please enter the verification code sent to your email address.
+        </p>
+        <form onSubmit={handleSubmit} className="auth-form">
+          <div className="form-group">
+            <input
+              type="text"
+              name="code"
+              placeholder="Enter verification code"
+              value={code}
+              onChange={handleCodeChange}
+              required
+            />
+          </div>
+          <button type="submit" disabled={isLoading}>
+            {isLoading ? 'Verifying...' : 'Verify Email'}
+          </button>
+        </form>
+        {message && (
+          <div className={`message ${message.includes('successfully') ? 'success' : 'error'}`}>
+            {message}
+          </div>
+        )}
+        <div className="auth-links">
+          <Link to="/login">Back to Login</Link>
+          <span> | </span>
+          <Link to="/register">Create Account</Link>
+        </div>
+      </div>
     </div>
   );
 };

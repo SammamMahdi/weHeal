@@ -1,0 +1,22 @@
+export const MEDICAL_SPECIALIZATIONS = [
+  'General Medicine',
+  'Cardiology',
+  'Dermatology',
+  'Endocrinology',
+  'Gastroenterology',
+  'Neurology',
+  'Obstetrics & Gynecology',
+  'Ophthalmology',
+  'Orthopedics',
+  'Pediatrics',
+  'Psychiatry',
+  'Pulmonology',
+  'Rheumatology',
+  'Urology',
+  'ENT (Ear, Nose & Throat)',
+  'Emergency Medicine',
+  'Family Medicine',
+  'Internal Medicine',
+  'Oncology',
+  'Pathology'
+]; 

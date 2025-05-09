@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>WeHeal – Administrator Dashboard</title>
+  <link rel="stylesheet" href="dashboard.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body class="admin">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="logo">WeHeal</div>
+    <a href="#" class="active"><i data-feather="users"></i> User Management</a>
+    <a href="#"><i data-feather="shield"></i> Role &amp; Permissions</a>
+    <a href="#"><i data-feather="file-text"></i> Audit Logs</a>
+    <a href="#"><i data-feather="settings"></i> System Configuration</a>
+    <a href="#"><i data-feather="bar-chart-2"></i> Analytics &amp; Reports</a>
+    <a href="#"><i data-feather="lock"></i> Compliance &amp; Security</a>
+  </aside>
+
+  <!-- MAIN AREA -->
+  <div class="main-wrapper">
+    <header class="header">
+      <div class="search">
+        <input type="text" placeholder="Search users, settings…"/>
+      </div>
+      <div class="profile">
+        <img src="https://i.pravatar.cc/36?img=11" alt="avatar"/>
+        <span>Administrator</span>
+      </div>
+    </header>
+
+    <div class="main">
+      <h1>Welcome, Administrator.</h1>
+
+      <!-- Formal Metric Cards -->
+      <div class="widgets-row">
+        <div class="widget">
+          <h3>User Statistics</h3>
+          <p>Patients: <strong>1,230</strong><br/>
+             Doctors: <strong>45</strong><br/>
+             Staff:   <strong>12</strong></p>
+        </div>
+        <div class="widget">
+          <h3>System Health</h3>
+          <p>Uptime: <strong>99.99%</strong><br/>
+             API RT: <strong>120 ms</strong><br/>
+             DB Status: <strong>Online</strong></p>
+        </div>
+        <div class="widget">
+          <h3>Feedback &amp; Ratings</h3>
+          <p>Avg. Rating: <strong>4.7</strong><br/>
+             Top Performer: Dr. Lee<br/>
+             Bottom Performer: Dr. Patel</p>
+        </div>
+        <div class="widget">
+          <h3>Compliance Alerts</h3>
+          <p>Pending Audits: <strong>2</strong><br/>
+             GDPR Items: <strong>5</strong></p>
+        </div>
+      </div>
+
+      <!-- Charts Section -->
+      <div class="charts-section">
+        <div class="chart-card">
+          <h3>User Distribution</h3>
+          <canvas id="userChart"></canvas>
+        </div>
+        <div class="chart-card">
+          <h3>API Response Time</h3>
+          <canvas id="responseChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Key Actions -->
+      <div class="actions-row">
+        <button class="btn btn-primary">Add / Edit / Remove User</button>
+        <button class="btn btn-secondary">Assign / Revoke Roles</button>
+        <button class="btn btn-primary">View Audit Trail</button>
+        <button class="btn btn-secondary">Configure Authentication</button>
+        <button class="btn btn-primary">Manage Integrations</button>
+        <button class="btn btn-secondary">Run / Schedule Reports</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    feather.replace();
+
+    const userCtx     = document.getElementById('userChart').getContext('2d');
+    const responseCtx = document.getElementById('responseChart').getContext('2d');
+
+    new Chart(userCtx, {
+      type: 'doughnut',
+      data: {
+        labels: ['Patients','Doctors','Staff'],
+        datasets: [{ data:[1230,45,12], backgroundColor:['#007B5D','#5A58D8','#F0984B'] }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { position: 'bottom' } }
+      }
+    });
+
+    new Chart(responseCtx, {
+      type: 'line',
+      data: {
+        labels: ['Jan','Feb','Mar','Apr','May'],
+        datasets: [{
+          label: 'Avg API RT (ms)',
+          data: [120,130,115,140,125],
+          borderColor: '#014CC4',
+          backgroundColor: 'rgba(1,76,196,0.1)',
+          fill: true,
+          tension: 0.3
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: { y: { beginAtZero: true } }
+      }
+    });
+  </script>
+</body>
+</html>

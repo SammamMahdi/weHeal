@@ -1,29 +1,60 @@
-import React, { useEffect, useState } from 'react';
-import { Navigate, Outlet } from 'react-router-dom';
-import axios from 'axios';
+import React, { useState, useEffect } from 'react';
+import { Navigate, useLocation, Outlet } from 'react-router-dom';
+import { checkAuth } from '../utils/api';
 
 const ProtectedRoute = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [user, setUser] = useState(null);
+  const location = useLocation();
 
   useEffect(() => {
-    axios.get('http://localhost:5000/auth/check-auth', { withCredentials: true })
-      .then(response => {
-        if (response.data.success) {
+    const verifyAuth = async () => {
+      try {
+        // First check if we have a token
+        const token = localStorage.getItem('token');
+        if (!token) {
+          setIsAuthenticated(false);
+          setIsLoading(false);
+          return;
+        }
+
+        const response = await checkAuth();
+        if (response.success) {
+          setUser(response.user);
           setIsAuthenticated(true);
+          
+          // Check if trying to access admin route without admin role
+          if (location.pathname.includes('/dashboard/admin') && response.user.role !== 'Admin') {
+            console.log('Non-admin user trying to access admin route');
+            setIsAuthenticated(false);
+          }
         } else {
+          // If verification fails, clear the stored data
+          localStorage.removeItem('token');
+          localStorage.removeItem('user');
           setIsAuthenticated(false);
         }
-      })
-      .catch(error => {
+      } catch (error) {
+        console.error('Auth verification error:', error);
         setIsAuthenticated(false);
-      });
-  }, []);
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-  if (isAuthenticated === null) {
-    return <div>Loading...</div>; // Show a loading state until we know if the user is authenticated
+    verifyAuth();
+  }, [location.pathname]);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
   }
 
-  return isAuthenticated ? <Outlet /> : <Navigate to="/login" />; // Redirect to login if not authenticated
+  if (!isAuthenticated) {
+    return <Navigate to="/login" state={{ from: location }} replace />;
+  }
+
+  return <Outlet context={{ user }} />;
 };
 
 export default ProtectedRoute;

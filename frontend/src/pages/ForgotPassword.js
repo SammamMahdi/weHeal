@@ -1,6 +1,8 @@
 // src/pages/ForgotPassword.js
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { forgotPassword } from '../utils/api'; // Assuming forgotPassword API method is implemented
+import '../styles/Auth.css';
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
@@ -35,20 +37,31 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div className="forgot-password-container">
-      <h2>Forgot Password</h2>
-      <form onSubmit={handleSubmit} className="forgot-password-form">
-        <input
-          type="email"
-          name="email"
-          placeholder="Enter your email"
-          value={email}
-          onChange={handleEmailChange}
-          required
-        />
-        <button type="submit" disabled={isLoading}>Send Reset Link</button>
-      </form>
-      {message && <p className="message">{message}</p>}
+    <div className="auth-container">
+      <div className="auth-form-container">
+        <h2>Reset Your Password</h2>
+        <form onSubmit={handleSubmit} className="auth-form">
+          <input
+            type="email"
+            name="email"
+            placeholder="Enter your email"
+            value={email}
+            onChange={handleEmailChange}
+            required
+          />
+          <button type="submit" disabled={isLoading}>
+            {isLoading ? "Sending..." : "Send Reset Link"}
+          </button>
+          <div className="auth-links">
+            Remember your password? <Link to="/login">Login</Link>
+          </div>
+        </form>
+        {message && (
+          <p className={`message ${message.includes("sent") ? "success" : "error"}`}>
+            {message}
+          </p>
+        )}
+      </div>
     </div>
   );
 };

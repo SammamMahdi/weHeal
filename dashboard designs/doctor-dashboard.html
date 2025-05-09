@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>WeHeal – Doctor Dashboard</title>
+  <link rel="stylesheet" href="dashboard.css"/>
+  <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body class="doctor">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="logo">WeHeal</div>
+    <a href="#" class="active"><i data-feather="home"></i> Dashboard</a>
+    <a href="#"><i data-feather="calendar"></i> My Schedule</a>
+    <a href="#"><i data-feather="video"></i> Tele‑Consultations</a>
+    <a href="#"><i data-feather="users"></i> Patient List</a>
+    <a href="#"><i data-feather="file-text"></i> EMR</a>
+    <a href="#"><i data-feather="clipboard"></i> Prescriptions</a>
+    <a href="#"><i data-feather="mail"></i> Messages</a>
+    <a href="#"><i data-feather="sliders"></i> Availability</a>
+  </aside>
+
+  <!-- MAIN AREA -->
+  <div class="main-wrapper">
+    <!-- HEADER -->
+    <header class="header">
+      <div class="search">
+        <input type="text" placeholder="Search patients, records…"/>
+      </div>
+      <div class="profile">
+        <img src="https://i.pravatar.cc/36?img=8" alt="avatar"/>
+        <span>Dr. Syeda Maliha Tabassum</span>
+      </div>
+    </header>
+
+    <!-- CONTENT -->
+    <div class="main">
+      <h1>Good Morning, Dr. Maliha.</h1>
+
+      <!-- TOP ACTIONS -->
+      <div class="actions-top">
+        <button class="btn btn-primary">
+          <i data-feather="video"></i> Start Consultation
+        </button>
+        <button class="btn btn-primary">
+          <i data-feather="sliders"></i> Update Availability
+        </button>
+        <button class="btn btn-secondary">
+          <i data-feather="user-plus"></i> Refer Patient
+        </button>
+      </div>
+
+      <!-- SCHEDULE TIMELINE -->
+      <section class="schedule-section">
+        <h2>Today's Schedule</h2>
+        <div class="timeline">
+          <div class="timeline-item">
+            <span class="time">09:00</span>
+            <span class="details">John Doe</span>
+            <span class="mode">In‑Person</span>
+          </div>
+          <div class="timeline-item">
+            <span class="time">10:30</span>
+            <span class="details">Jane Roe</span>
+            <span class="mode">Tele‑Consult</span>
+          </div>
+          <div class="timeline-item">
+            <span class="time">11:30</span>
+            <span class="details">Bob Smith</span>
+            <span class="mode">In‑Person</span>
+          </div>
+          <div class="timeline-item">
+            <span class="time">13:00</span>
+            <span class="details">Alice Chen</span>
+            <span class="mode">Tele‑Consult</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- SUMMARY CARDS -->
+      <div class="summary-row">
+        <div class="summary-card card-queue">
+          <i data-feather="user-check"></i>
+          <h3>Waiting Queue</h3>
+          <p class="value">3</p>
+          <p class="sub">Patients waiting</p>
+        </div>
+        <div class="summary-card card-prescribe">
+          <i data-feather="file-text"></i>
+          <h3>Pending Rx</h3>
+          <p class="value">2</p>
+          <p class="sub">Drafts to sign</p>
+        </div>
+        <div class="summary-card card-messages">
+          <i data-feather="mail"></i>
+          <h3>Unread Messages</h3>
+          <p class="value">5</p>
+          <p class="sub">From patients</p>
+        </div>
+      </div>
+
+      <!-- TABLE & CRITICAL ACTIONS -->
+      <div class="content-split">
+        <div class="table-container">
+          <div class="table-header">
+            <input type="text" placeholder="Search queue…"/>
+            <div class="actions">
+              <button title="Download CSV"><i data-feather="download"></i></button>
+              <button title="Refresh"><i data-feather="refresh-ccw"></i></button>
+            </div>
+          </div>
+          <table class="app-table">
+            <thead>
+              <tr>
+                <th>Patient Name</th>
+                <th>Arrival Time</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Mark Lee</td>
+                <td>10:05 AM</td>
+                <td>Waiting</td>
+                <td><button class="btn btn-primary">Admit</button></td>
+              </tr>
+              <tr>
+                <td>Sara Khan</td>
+                <td>10:00 AM</td>
+                <td>Waiting</td>
+                <td><button class="btn btn-primary">Admit</button></td>
+              </tr>
+              <tr>
+                <td>Kevin Ng</td>
+                <td>09:55 AM</td>
+                <td>Waiting</td>
+                <td><button class="btn btn-primary">Admit</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="alerts-panel">
+          <h3>Critical Actions</h3>
+          <div class="critical-actions">
+            <button class="btn-critical">
+              <i data-feather="clipboard"></i> Assign Lab Test
+            </button>
+            <button class="btn-critical">
+              <i data-feather="package"></i> Prescribe Medicine
+            </button>
+            <button class="btn-critical">
+              <i data-feather="phone-call"></i> Call Ambulance
+            </button>
+            <button class="btn-critical">
+              <i data-feather="wind"></i> Assign Oxygen
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>feather.replace()</script>
+</body>
+</html>

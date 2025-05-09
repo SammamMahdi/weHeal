@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>WeHeal – Patient Dashboard</title>
+  <link rel="stylesheet" href="dashboard.css"/>
+  <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body class="patient">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="logo">WeHeal</div>
+    <a href="#" class="active"><i data-feather="home"></i> Dashboard</a>
+    <a href="#"><i data-feather="calendar"></i> Book Appointment</a>
+    <a href="#"><i data-feather="clock"></i> My Appointments</a>
+    <a href="#"><i data-feather="video"></i> Tele‑Consultations</a>
+    <a href="#"><i data-feather="file-text"></i> My EMR</a>
+    <a href="#"><i data-feather="clipboard"></i> Prescriptions</a>
+    <a href="#"><i data-feather="box"></i> Medicine & Labs</a>
+    <a href="#"><i data-feather="alert-triangle"></i> Emergency Services</a>
+    <a href="#"><i data-feather="credit-card"></i> Payments & Insurance</a>
+    <a href="#"><i data-feather="star"></i> Feedback & Ratings</a>
+  </aside>
+
+  <!-- MAIN AREA -->
+  <div class="main-wrapper">
+    <!-- HEADER -->
+    <header class="header">
+      <div class="search">
+        <input type="text" placeholder="Search doctors, services…"/>
+      </div>
+      <div class="profile">
+        <img src="https://i.pravatar.cc/36?img=5" alt="avatar"/>
+        <span>Syeda Maliha Tabassum</span>
+      </div>
+    </header>
+
+    <!-- CONTENT -->
+    <div class="main">
+      <h1>Welcome, Syeda Maliha Tabassum.</h1>
+
+      <!-- Widgets -->
+      <div class="widgets-row">
+        <div class="widget">
+          <h3>Health Snapshot</h3>
+          <ul>
+            <li>Total Visits: <strong>12</strong></li>
+            <li>Outstanding Bills: <strong>$42.50</strong></li>
+            <li>Loyalty Points: <strong>120</strong></li>
+          </ul>
+        </div>
+        <div class="widget">
+          <h3>Latest Prescription</h3>
+          <p>2 Prescriptions</p>
+          <button class="btn btn-secondary">View Details</button>
+        </div>
+        <div class="widget">
+          <h3>Notifications & Reminders</h3>
+          <ul>
+            <li>⚠️ Appointment with Dr. Smith tomorrow at 10:00</li>
+            <li>💊 Refill Amoxicillin due in 2 days</li>
+            <li>🧪 Lab results ready for CBC test</li>
+          </ul>
+          <button class="btn btn-secondary">View All</button>
+        </div>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="actions-row">
+        <button class="btn btn-primary"><i data-feather="calendar"></i> Book New Appointment</button>
+        <button class="btn btn-primary"><i data-feather="package"></i> Order Medicine</button>
+        <button class="btn btn-primary"><i data-feather="droplet"></i> Book Lab Test</button>
+        <button class="btn btn-primary"><i data-feather="phone-call"></i> Request Ambulance</button>
+        <button class="btn btn-primary"><i data-feather="message-circle"></i> Raise Feedback</button>
+      </div>
+
+      <!-- Upcoming Appointments -->
+      <h2 style="margin:2rem 0 1rem; font-weight:600; color:var(--grey)">
+        Upcoming Appointments
+      </h2>
+      <div class="appt-carousel">
+        <div class="appt-card">
+          <img src="https://i.pravatar.cc/40?img=12" alt="Dr. Smith"/>
+          <h4>Dr. Smith</h4>
+          <span>In‑Person</span>
+          <span style="font-size:.8rem; color:var(--grey)">Apr 20 • 10:00–11:00</span>
+          <button class="btn btn-primary">Join</button>
+        </div>
+        <div class="appt-card">
+          <img src="https://i.pravatar.cc/40?img=15" alt="Dr. Lee"/>
+          <h4>Dr. Lee</h4>
+          <span>Tele‑Consult</span>
+          <span style="font-size:.8rem; color:var(--grey)">Apr 25 • 14:30–15:00</span>
+          <button class="btn btn-primary">Join</button>
+        </div>
+      </div>
+
+      <!-- Table & Details -->
+      <div class="content-split">
+        <div class="table-container">
+          <div class="table-header">
+            <input type="text" placeholder="Filter appointments…"/>
+            <div class="actions">
+              <button title="Download CSV"><i data-feather="download"></i></button>
+              <button title="Refresh"><i data-feather="refresh-ccw"></i></button>
+            </div>
+          </div>
+          <table class="app-table">
+            <thead>
+              <tr>
+                <th>Date & Time</th>
+                <th>Doctor</th>
+                <th>Type</th>
+                <th>Status</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Apr 20, 2025<br><small>10:00–11:00</small></td>
+                <td>Dr. Smith</td>
+                <td>In‑Person</td>
+                <td style="color:green">Scheduled</td>
+                <td>
+                  <button class="btn btn-primary">Reschedule</button>
+                  <button class="btn btn-secondary">Cancel</button>
+                </td>
+              </tr>
+              <tr>
+                <td>Apr 25, 2025<br><small>14:30–15:00</small></td>
+                <td>Dr. Lee</td>
+                <td>Tele‑Consult</td>
+                <td style="color:orange">Pending</td>
+                <td>
+                  <button class="btn btn-primary">Reschedule</button>
+                  <button class="btn btn-secondary">Cancel</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="details-panel">
+          <h3>Appointment Details</h3>
+          <p><strong>Date & Time:</strong> Apr 20, 2025 • 10:00–11:00</p>
+          <p><strong>Doctor:</strong> Dr. Smith</p>
+          <p><strong>Mode:</strong> In‑Person</p>
+          <p><strong>Location:</strong> City Clinic, Room 402</p>
+          <button class="btn btn-primary" style="width:100%; margin-top:1rem;">Join Consultation</button>
+          <button class="btn btn-secondary" style="width:100%; margin-top:.5rem;">Cancel</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>feather.replace()</script>
+</body>
+</html>
