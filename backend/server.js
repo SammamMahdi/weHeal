@@ -33,7 +33,7 @@ app.use(
       "http://localhost:3000",
       "http://localhost:5174",
       "http://localhost:5175",
-      'https://weheal.onrender.com',
+      'https://weheal-1.onrender.com',
     ],
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
